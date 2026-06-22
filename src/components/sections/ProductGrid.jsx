@@ -71,6 +71,31 @@ export default function ProductGrid() {
     return () => window.removeEventListener('keydown', onKey);
   }, [galleryLightbox]);
 
+  // Handle hardware/browser Back button to close modal/lightbox on mobile
+  useEffect(() => {
+    const isModalOpen = selectedProduct !== null || galleryLightbox !== null;
+    if (!isModalOpen) return;
+
+    // Push a dummy state to browser history when modal is open
+    window.history.pushState({ modalOpen: true }, '');
+
+    const handlePopState = () => {
+      if (selectedProduct !== null) setSelectedProduct(null);
+      if (galleryLightbox !== null) setGalleryLightbox(null);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      
+      // If modal was closed manually, remove the dummy state from history
+      if (window.history.state?.modalOpen) {
+        window.history.back();
+      }
+    };
+  }, [selectedProduct, galleryLightbox]);
+
   return (
     <section
       id="collections"
