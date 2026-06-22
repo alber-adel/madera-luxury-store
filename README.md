@@ -38,8 +38,8 @@ Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended).
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/alber-adel/madera-home-landing-page.git
-   cd madera-home-landing-page
+   git clone https://github.com/alber-adel/madera-luxury-store.git
+   cd madera-luxury-store
    ```
 
 2. **Install dependencies:**
