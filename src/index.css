@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global variables ── */
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E2CFA5;
+  --gold-dark: #A07840;
+  --charcoal: #1C1C1E;
+  --charcoal-light: #3A3A3C;
+  --charcoal-muted: #6E6E73;
+  --ivory: #FAF8F5;
+  --sand-100: #F9F5EE;
+  --sand-200: #F0E9DC;
+  --walnut: #5C3D2E;
+  --oak: #A0784A;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-8 py-3.5
+           bg-charcoal text-ivory text-xs font-medium tracking-[0.15em] uppercase
+           transition-all duration-500 cursor-pointer no-underline border-0
+           relative overflow-hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-gold opacity-0 transition-opacity duration-300;
+  }
+  .btn-primary:hover::after {
+    @apply opacity-100;
+  }
+  .btn-primary span, .btn-primary svg {
+    @apply relative z-10;
+  }
+  .btn-primary:hover {
+    @apply -translate-y-0.5 shadow-gold;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           px-8 py-3.5
+           border border-charcoal text-charcoal text-xs font-medium tracking-[0.15em] uppercase
+           bg-transparent transition-all duration-300 cursor-pointer no-underline
+           hover:bg-charcoal hover:text-ivory hover:-translate-y-0.5;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2
+           px-8 py-3.5
+           bg-gold text-white text-xs font-medium tracking-[0.15em] uppercase
+           transition-all duration-300 cursor-pointer no-underline border-0
+           hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-gold;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3
+           text-charcoal-muted text-xs font-medium tracking-[0.12em] uppercase
+           bg-transparent transition-all duration-300 cursor-pointer no-underline border-0
+           hover:text-gold;
+  }
+
+  /* ── Section typography ── */
+  .section-eyebrow {
+    @apply block text-[0.65rem] font-medium tracking-[0.3em] uppercase text-gold;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    @apply text-4xl lg:text-5xl text-charcoal mt-4 leading-tight;
+  }
+
+  /* ── Cards ── */
+  .product-card {
+    @apply bg-white relative overflow-hidden
+           shadow-card transition-all duration-500
+           hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  /* ── Filter Pills ── */
+  .filter-pill {
+    @apply px-5 py-2 text-[0.8125rem] font-medium tracking-wide
+           border border-sand-200 text-charcoal-muted
+           bg-transparent transition-all duration-300 cursor-pointer rounded-sm
+           hover:border-gold hover:text-gold hover:-translate-y-0.5;
+  }
+
+  .filter-pill-active {
+    @apply px-5 py-2 text-[0.8125rem] font-medium tracking-wide
+           bg-charcoal text-ivory border border-charcoal rounded-sm
+           transition-all duration-300 cursor-pointer;
+  }
+
+  /* ── Gold divider ── */
+  .gold-divider {
+    @apply block w-12 h-px bg-gold;
+  }
+
+  /* ── Scroll reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(2.5rem);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(2.5rem);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ── Glassmorphism card ── */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-card-warm {
+    background: rgba(250, 248, 245, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+  }
+
+  /* ── Testimonial card ── */
+  .testimonial-card {
+    @apply relative bg-white p-8 shadow-warm transition-all duration-500
+           hover:-translate-y-2 hover:shadow-card-hover;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .testimonial-card:hover {
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── Delivery feature card ── */
+  .delivery-card {
+    @apply relative overflow-hidden p-8 transition-all duration-500
+           hover:-translate-y-1;
+    background: linear-gradient(135deg, rgba(250,248,245,0.8) 0%, rgba(240,233,220,0.4) 100%);
+    border: 1px solid rgba(201,169,110,0.15);
+  }
+  .delivery-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+    transition: height 0.4s ease;
+  }
+  .delivery-card:hover::before {
+    height: 100%;
+  }
+
+  /* ── Number counter badge ── */
+  .stat-number {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    @apply text-5xl font-light text-gold leading-none;
+  }
+
+  /* ── Quote mark decoration ── */
+  .quote-mark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    @apply text-[5rem] leading-none text-gold/25 font-bold absolute -top-4 -left-2;
+    line-height: 1;
+  }
+
+  /* ── Star rating ── */
+  .star-filled {
+    @apply text-gold;
+  }
+  .star-empty {
+    @apply text-sand-200;
+  }
+}
+
+@layer utilities {
+  .aspect-product {
+    aspect-ratio: 4 / 3;
+  }
+  .aspect-hero {
+    aspect-ratio: 3 / 4;
+  }
+  .aspect-portrait {
+    aspect-ratio: 2 / 3;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-sand-100;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gold/50 rounded-full;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Text gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Wooden texture overlay */
+  .wood-overlay {
+    position: relative;
+  }
+  .wood-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(92,61,46,0.05) 0%,
+      transparent 50%,
+      rgba(160,120,64,0.05) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Section divider wave */
+  .wave-divider {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Shimmer skeleton */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--sand-100) 25%,
+      var(--sand-200) 50%,
+      var(--sand-100) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* ── Custom keyframes not in Tailwind ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.45); }
+  50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+}
+
+@keyframes heroImageFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-8px) rotate(0.3deg); }
+  66%       { transform: translateY(4px) rotate(-0.2deg); }
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(201,169,110,0.3); }
+  50%       { border-color: rgba(201,169,110,0.8); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero parallax subtle ── */
+.hero-img-float {
+  animation: heroImageFloat 8s ease-in-out infinite;
+}
+
+/* ── Smooth underline animation ── */
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Testimonial carousel dots ── */
+.carousel-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sand-300);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.carousel-dot.active {
+  background: var(--gold);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ── Gold accent line animation ── */
+.gold-line-grow {
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.visible .gold-line-grow,
+.gold-line-grow.active {
+  transform: scaleX(1);
+}
+
+/* ── Page loading transition ── */
+.page-enter {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ── Selection color ── */
+::selection {
+  background: rgba(201, 169, 110, 0.25);
+  color: var(--charcoal);
+}
